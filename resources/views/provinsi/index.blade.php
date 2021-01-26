@@ -13,7 +13,8 @@
                 <div class="card-header">
                     Data Provinsi
                     <a href="{{route('provinsi.create')}}" class="float-right">
-                        Tambah Data
+                    <button type="submit" class="btn btn-danger">Tambah Data</button>
+                        
                     </a>
                 </div>
                 <div class="card-body">

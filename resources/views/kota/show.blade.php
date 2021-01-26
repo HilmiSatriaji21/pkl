@@ -8,6 +8,16 @@
                 <div class="card-header">{{ __('Data Kota') }}</div>
 
                 <div class="card-body">
+                {{-- menampilkan error validasi --}}
+                            @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
                    <div class="form-group">
                     <div class="mb-12>
                         <label for="exampleInputEmail1" class="form-label"><b>Kode Kota</b></label>

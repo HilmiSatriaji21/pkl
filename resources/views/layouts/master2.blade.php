@@ -44,6 +44,7 @@
          @yield('content')
       </div>
   </section>
+  <!-- SEARCH FORM -->
   
 <script src="{{asset('assets/plugins/jquery/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->

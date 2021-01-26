@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    <h3> Ini Halaman Home! </h3>
+                    <b><center><h3> ホームヤード </h3></center></b>
                 </div>
             </div>
         </div>

@@ -89,3 +89,4 @@ Route::resource('rw', RwController::class);
 
 use App\Http\Controllers\Kasus2Controller;
 Route::resource('kasus2', Kasus2Controller::class);
+

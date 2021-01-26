@@ -3,22 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\provinsi;
-use App\Http\Controllers\DB; ###
+use App\Http\Controllers\DB; 
 use Illuminate\Http\Request;
 
 
 class ProvinsiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
     public function index()
     {
         $provinsi = Provinsi::all();
-        return view('provinsi.index', compact('provinsi'));  ###
+        return view('provinsi.index', compact('provinsi'));  
     }
 
     /**
@@ -40,6 +35,19 @@ class ProvinsiController extends Controller
     public function store(Request $request)
     {
         $provinsi = new Provinsi;
+        $messages = [
+            'required' => ':attribute wajib diisi cuy!!!',
+            'min' => ':attribute harus diisi minimal :min karakter ya cuy!!!',
+            'max' => ':attribute harus diisi maksimal :max karakter ya cuy!!!',
+            'numeric' => ':attribute harus diisi dengan angka ya cuy!!!',
+        ];
+
+        $this->validate($request,[
+            'kode_provinsi' => 'required|numeric',
+            'nama_provinsi' => 'required|min:8|max:30',
+        ],$messages);
+
+        $provinsi = new Provinsi;
         $provinsi->kode_provinsi = $request->kode_provinsi;
         $provinsi->nama_provinsi = $request->nama_provinsi;
         $provinsi->save();
@@ -54,6 +62,18 @@ class ProvinsiController extends Controller
      */
     public function show($id)
     {
+        $messages = [
+            'required' => ':attribute wajib diisi cuy!!!',
+            'min' => ':attribute harus diisi minimal :min karakter ya cuy!!!',
+            'max' => ':attribute harus diisi maksimal :max karakter ya cuy!!!',
+            'numeric' => ':attribute harus diisi dengan angka ya cuy!!!',
+        ];
+
+        $this->validate($request,[
+            'kode_provinsi' => 'required|numeric',
+            'nama_provinsi' => 'required|min:8|max:30',
+        ],$messages);
+
         $provinsi = Provinsi::findOrFail($id);
         return view('provinsi.show',compact('provinsi'));
     }
@@ -79,6 +99,18 @@ class ProvinsiController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $messages = [
+            'required' => ':attribute wajib diisi cuy!!!',
+            'min' => ':attribute harus diisi minimal :min karakter ya cuy!!!',
+            'max' => ':attribute harus diisi maksimal :max karakter ya cuy!!!',
+            'numeric' => ':attribute harus diisi dengan angka ya cuy!!!',
+        ];
+
+        $this->validate($request,[
+            'kode_provinsi' => 'required|numeric',
+            'nama_provinsi' => 'required|min:8|max:30',
+        ],$messages);
+
         $provinsi = Provinsi::findOrFail($id);
         $provinsi->kode_provinsi = $request->kode_provinsi;
         $provinsi->nama_provinsi = $request->nama_provinsi;

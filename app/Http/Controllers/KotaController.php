@@ -41,6 +41,19 @@ class KotaController extends Controller
     public function store(Request $request)
     {
         $kota= new Kota();
+        $messages = [
+            'required' => ':attribute wajib diisi cuy!!!',
+            'min' => ':attribute harus diisi minimal :min karakter ya cuy!!!',
+            'max' => ':attribute harus diisi maksimal :max karakter ya cuy!!!',
+            'numeric' => ':attribute harus diisi dengan angka ya cuy!!!',
+        ];
+
+        $this->validate($request,[
+            'kode_kota' => 'required|numeric',
+            'nama_kota' => 'required|min:8|max:30',
+            'id_provinsi' => 'required|numeric',
+        ],$messages);
+
         $kota->kode_kota = $request->kode_kota;
         $kota->nama_kota = $request->nama_kota;
         $kota->id_provinsi = $request->id_provinsi; 
@@ -56,6 +69,19 @@ class KotaController extends Controller
      */
     public function show($id)
     {
+        $messages = [
+            'required' => ':attribute wajib diisi cuy!!!',
+            'min' => ':attribute harus diisi minimal :min karakter ya cuy!!!',
+            'max' => ':attribute harus diisi maksimal :max karakter ya cuy!!!',
+            'numeric' => ':attribute harus diisi dengan angka ya cuy!!!',
+        ];
+
+        $this->validate($request,[
+            'kode_kota' => 'required|numeric',
+            'nama_kota' => 'required|min:8|max:30',
+            'id_provinsi' => 'required|numeric',
+        ],$messages);
+
         $kota = Kota::findOrFail($id);
         return view('kota.show',compact('kota'));
     }
@@ -82,6 +108,19 @@ class KotaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $messages = [
+            'required' => ':attribute wajib diisi cuy!!!',
+            'min' => ':attribute harus diisi minimal :min karakter ya cuy!!!',
+            'max' => ':attribute harus diisi maksimal :max karakter ya cuy!!!',
+            'numeric' => ':attribute harus diisi dengan angka ya cuy!!!',
+        ];
+
+        $this->validate($request,[
+            'kode_kota' => 'required|numeric',
+            'nama_kota' => 'required|min:8|max:30',
+            'id_provinsi' => 'required|numeric',
+        ],$messages);
+        
         $kota = Kota::findOrFail($id);
         $kota->kode_kota = $request->kode_kota;
         $kota->nama_kota = $request->nama_kota;

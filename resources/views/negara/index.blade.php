@@ -13,7 +13,7 @@
                 <div class="card-header">
                     Data Negara
                     <a href="{{route('negara.create')}}" class="float-right">
-                        Tambah Data
+                    <button type="submit" class="btn btn-danger">Tambah Data</button>
                     </a>
                 </div>
                 <div class="card-body">

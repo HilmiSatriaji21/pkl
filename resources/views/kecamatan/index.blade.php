@@ -12,7 +12,8 @@
             <div class="card">
                 <div class="card-header">
                     Data Kecamatan
-                    <a href="{{route('kecamatan.create')}}" class="float-right">Tambah Data</a>
+                    <a href="{{route('kecamatan.create')}}" class="float-right">
+                    <button type="submit" class="btn btn-danger">Tambah Data</button></a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
