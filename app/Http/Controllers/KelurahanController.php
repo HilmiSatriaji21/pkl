@@ -41,6 +41,19 @@ class KelurahanController extends Controller
     public function store(Request $request)
     {
         $kelurahan= new Kelurahan();
+        $messages = [
+            'required' => ':attribute wajib diisi ya bro mba sis!!!',
+            'max' => ':attribute harus diisi maksimal :max karakter ya bro mba sis!!!',
+            'alpha' => ':attribute harus diisi dengan huruf ya bro mba sis!!!',
+            'numeric' => ':attribute harus diisi dengan angka ya bro mba sis!!!',
+            'unique' => ':attribute tidak boleh sama ya bro mba sis!!!',
+        ];
+
+        $this->validate($request,[
+            'nama_kelurahan' => 'required|alpha|unique:kelurahans|max:30',
+            'id_kecamatan' => 'required|numeric',
+        ],$messages);
+
         $kelurahan->nama_kelurahan = $request->nama_kelurahan;
         $kelurahan->id_kecamatan = $request->id_kecamatan; 
         $kelurahan->save();
@@ -82,6 +95,19 @@ class KelurahanController extends Controller
     public function update(Request $request, $id)
     {
         $kelurahan= new Kelurahan();
+        $messages = [
+            'required' => ':attribute wajib diisi ya bro mba sis!!!',
+            'max' => ':attribute harus diisi maksimal :max karakter ya bro mba sis!!!',
+            'alpha' => ':attribute harus diisi dengan huruf ya bro mba sis!!!',
+            'numeric' => ':attribute harus diisi dengan angka ya bro mba sis!!!',
+            'unique' => ':attribute tidak boleh sama ya bro mba sis!!!',
+        ];
+
+        $this->validate($request,[
+            'nama_kelurahan' => 'required|alpha|unique:kelurahans|max:30',
+            'id_kecamatan' => 'required|numeric',
+        ],$messages);
+        
         $kelurahan->nama_kelurahan = $request->nama_kelurahan;
         $kelurahan->id_kecamatan = $request->id_kecamatan; 
         $kelurahan->save();

@@ -8,9 +8,20 @@
                 <div class="card-header">{{ __('Tambah Data Kecamatan') }}</div>
 
                 <div class="card-body">
-                    
+                {{-- menampilkan error validasi --}}
+                            @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+                            
                     <form action="{{ route('kecamatan.store')}}" method="POST">
                         @csrf
+                        
                         <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label">Kode Kecamatan</label>
                           <input type="text" name="kode_kecamatan" class="form-control" id="exampleInputEmail1" 

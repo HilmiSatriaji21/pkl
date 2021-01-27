@@ -34,20 +34,21 @@ class ProvinsiController extends Controller
      */
     public function store(Request $request)
     {
-        $provinsi = new Provinsi;
+        
         $messages = [
-            'required' => ':attribute wajib diisi cuy!!!',
-            'min' => ':attribute harus diisi minimal :min karakter ya cuy!!!',
-            'max' => ':attribute harus diisi maksimal :max karakter ya cuy!!!',
-            'numeric' => ':attribute harus diisi dengan angka ya cuy!!!',
+            'required' => ':attribute wajib diisi ya bro mba sis!!!',
+            'min' => ':attribute harus diisi minimal :min karakter ya bro mba sis!!!',
+            'max' => ':attribute harus diisi maksimal :max karakter ya bro mba sis!!!',
+            'alpha_num' => ':attribute tidak boleh sama ya bro mba sis!!!',
+            'numeric' => ':attribute harus diisi dengan angka ya bro mba sis!!!',
+            'unique' => ':attribute tidak boleh sama ya bro mba sis!!!',
         ];
 
         $this->validate($request,[
-            'kode_provinsi' => 'required|numeric',
-            'nama_provinsi' => 'required|min:8|max:30',
+            'kode_provinsi' => 'required|numeric|unique:provinsis|max:4',
+            'nama_provinsi' => 'required|alpha_num|unique:provinsis|max:30',
         ],$messages);
 
-        $provinsi = new Provinsi;
         $provinsi->kode_provinsi = $request->kode_provinsi;
         $provinsi->nama_provinsi = $request->nama_provinsi;
         $provinsi->save();
@@ -62,18 +63,6 @@ class ProvinsiController extends Controller
      */
     public function show($id)
     {
-        $messages = [
-            'required' => ':attribute wajib diisi cuy!!!',
-            'min' => ':attribute harus diisi minimal :min karakter ya cuy!!!',
-            'max' => ':attribute harus diisi maksimal :max karakter ya cuy!!!',
-            'numeric' => ':attribute harus diisi dengan angka ya cuy!!!',
-        ];
-
-        $this->validate($request,[
-            'kode_provinsi' => 'required|numeric',
-            'nama_provinsi' => 'required|min:8|max:30',
-        ],$messages);
-
         $provinsi = Provinsi::findOrFail($id);
         return view('provinsi.show',compact('provinsi'));
     }
@@ -100,15 +89,17 @@ class ProvinsiController extends Controller
     public function update(Request $request, $id)
     {
         $messages = [
-            'required' => ':attribute wajib diisi cuy!!!',
-            'min' => ':attribute harus diisi minimal :min karakter ya cuy!!!',
-            'max' => ':attribute harus diisi maksimal :max karakter ya cuy!!!',
-            'numeric' => ':attribute harus diisi dengan angka ya cuy!!!',
+            'required' => ':attribute wajib diisi ya bro mba sis!!!',
+            'min' => ':attribute harus diisi minimal :min karakter ya bro mba sis!!!',
+            'max' => ':attribute harus diisi maksimal :max karakter ya bro mba sis!!!',
+            'alpha_num' => ':attribute tidak boleh sama ya bro mba sis!!!',
+            'numeric' => ':attribute harus diisi dengan angka ya bro mba sis!!!',
+            'unique' => ':attribute tidak boleh sama ya bro mba sis!!!',
         ];
 
         $this->validate($request,[
-            'kode_provinsi' => 'required|numeric',
-            'nama_provinsi' => 'required|min:8|max:30',
+            'kode_provinsi' => 'required|numeric|unique:provinsis|max:4',
+            'nama_provinsi' => 'required|alpha_num|unique:provinsis|max:30',
         ],$messages);
 
         $provinsi = Provinsi::findOrFail($id);

@@ -17,8 +17,8 @@ class KecamatanController extends Controller
     
     public function index()
     {
-        $kecamatan = Kecamatan::with('kota')->get();
-        return view('kecamatan.index', compact('kecamatan'));
+        $kecamatan = Kecamatan::join('kotas','id_kota','=','kotas.id')->select('kecamatans.*','kotas.nama_kota')->get();
+        return view('kecamatan.index',compact('kecamatan'));
     }
 
     /**
@@ -41,6 +41,22 @@ class KecamatanController extends Controller
     public function store(Request $request)
     {
         $kecamatan= new Kecamatan();
+        $messages = [
+            'required' => ':attribute wajib diisi ya bro mba sis!!!',
+            'min' => ':attribute harus diisi minimal :min karakter ya bro mba sis!!!',
+            'max' => ':attribute harus diisi maksimal :max karakter ya bro mba sis!!!',
+            'alpha' => ':attribute harus diisi dengan huruf ya bro mba sis!!!',
+            'numeric' => ':attribute harus diisi dengan angka ya bro mba sis!!!',
+            'unique' => ':attribute tidak boleh sama ya bro mba sis!!!',
+        ];
+
+        $this->validate($request,[
+            'kode_kecamatan' => 'required|numeric|unique:kecamatans|max:3',
+            'nama_kecamatan' => 'required|alpha|unique:kecamatans|max:30',
+            'id_kota' => 'required|numeric',
+        ],$messages);
+
+
         $kecamatan->kode_kecamatan = $request->kode_kecamatan;
         $kecamatan->nama_kecamatan = $request->nama_kecamatan;
         $kecamatan->id_kota = $request->id_kota; 
@@ -56,7 +72,7 @@ class KecamatanController extends Controller
      */
     public function show($id)
     {
-        $kecamatan = Kecamatan::findOrFail($id);
+        $kecamatan = Kecamatan::join('kotas','id_kota','=','kotas.id')->select('kecamatans.*','kotas.nama_kota')->where('kecamatans.id', $id)->get();
         return view('kecamatan.show',compact('kecamatan'));
     }
 
@@ -83,6 +99,21 @@ class KecamatanController extends Controller
     public function update(Request $request, $id)
     {
         $kecamatan = Kecamatan::findOrFail($id);
+        $messages = [
+            'required' => ':attribute wajib diisi ya bro mba sis!!!',
+            'min' => ':attribute harus diisi minimal :min karakter ya bro mba sis!!!',
+            'max' => ':attribute harus diisi maksimal :max karakter ya bro mba sis!!!',
+            'alpha' => ':attribute harus diisi dengan huruf ya bro mba sis!!!',
+            'numeric' => ':attribute harus diisi dengan angka ya bro mba sis!!!',
+            'unique' => ':attribute tidak boleh sama ya bro mba sis!!!',
+        ];
+
+        $this->validate($request,[
+            'kode_kecamatan' => 'required|numeric|unique:kecamatans|max:3',
+            'nama_kecamatan' => 'required|alpha|unique:kecamatans|max:30',
+            'id_kota' => 'required|numeric',
+        ],$messages);
+        
         $kecamatan->kode_kecamatan = $request->kode_kecamatan;
         $kecamatan->nama_kecamatan = $request->nama_kecamatan;
         $kecamatan->id_kota = $request->id_kota;

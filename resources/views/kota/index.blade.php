@@ -17,12 +17,12 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table table-bordered" id="datatable">
                             <thead>
                                 <tr>
                                     <th>Nomor</th>
-                                    <th>Kode Kota</th>
                                     <th>Nama Provinsi</th>
+                                    <th>Kode Kota</th>
                                     <th>Nama Kota</th>
                                     <th>Action</th>
                                 </tr>
@@ -32,8 +32,8 @@
                                 @foreach($kota as $data)
                                 <tr>
                                     <td>{{$no++}}</td>
-                                    <td>{{$data->kode_kota}}</td>
                                     <td>{{$data->provinsi->nama_provinsi}}</td>
+                                    <td>{{$data->kode_kota}}</td>
                                     <td>{{$data->nama_kota}}</td>
                                     <td>
                                         <form action="{{route('kota.destroy',$data->id)}}" method="post">

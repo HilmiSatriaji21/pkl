@@ -17,7 +17,7 @@ class KotaController extends Controller
     
     public function index()
     {
-        $kota = Kota::with('provinsi')->get();
+        $kota = Kota::join('provinsis','id_provinsi','=','provinsis.id')->select('kotas.*','provinsis.nama_provinsi')->get();
         return view('kota.index', compact('kota'));
     }
 
@@ -42,15 +42,17 @@ class KotaController extends Controller
     {
         $kota= new Kota();
         $messages = [
-            'required' => ':attribute wajib diisi cuy!!!',
-            'min' => ':attribute harus diisi minimal :min karakter ya cuy!!!',
-            'max' => ':attribute harus diisi maksimal :max karakter ya cuy!!!',
-            'numeric' => ':attribute harus diisi dengan angka ya cuy!!!',
+            'required' => ':attribute wajib diisi ya bro mba sis!!!',
+            'min' => ':attribute harus diisi minimal :min karakter ya bro mba sis!!!',
+            'max' => ':attribute harus diisi maksimal :max karakter ya bro mba sis!!!',
+            'alpha' => ':attribute harus diisi dengan huruf ya bro mba sis!!!',
+            'numeric' => ':attribute harus diisi dengan angka ya bro mba sis!!!',
+            'unique' => ':attribute tidak boleh sama ya bro mba sis!!!',
         ];
 
         $this->validate($request,[
-            'kode_kota' => 'required|numeric',
-            'nama_kota' => 'required|min:8|max:30',
+            'kode_kota' => 'required|numeric|unique:kotas|max:3',
+            'nama_kota' => 'required|alpha|unique:kotas|max:30',
             'id_provinsi' => 'required|numeric',
         ],$messages);
 
@@ -69,20 +71,7 @@ class KotaController extends Controller
      */
     public function show($id)
     {
-        $messages = [
-            'required' => ':attribute wajib diisi cuy!!!',
-            'min' => ':attribute harus diisi minimal :min karakter ya cuy!!!',
-            'max' => ':attribute harus diisi maksimal :max karakter ya cuy!!!',
-            'numeric' => ':attribute harus diisi dengan angka ya cuy!!!',
-        ];
-
-        $this->validate($request,[
-            'kode_kota' => 'required|numeric',
-            'nama_kota' => 'required|min:8|max:30',
-            'id_provinsi' => 'required|numeric',
-        ],$messages);
-
-        $kota = Kota::findOrFail($id);
+        $kota = Kota::join('provinsis','id_provinsi','=','provinsis.id')->select('kotas.*','provinsis.nama_provinsi')->where('kotas.id', $id)->get();
         return view('kota.show',compact('kota'));
     }
 
@@ -109,15 +98,17 @@ class KotaController extends Controller
     public function update(Request $request, $id)
     {
         $messages = [
-            'required' => ':attribute wajib diisi cuy!!!',
-            'min' => ':attribute harus diisi minimal :min karakter ya cuy!!!',
-            'max' => ':attribute harus diisi maksimal :max karakter ya cuy!!!',
-            'numeric' => ':attribute harus diisi dengan angka ya cuy!!!',
+            'required' => ':attribute wajib diisi ya bro mba sis!!!',
+            'min' => ':attribute harus diisi minimal :min karakter ya bro mba sis!!!',
+            'max' => ':attribute harus diisi maksimal :max karakter ya bro mba sis!!!',
+            'alpha' => ':attribute harus diisi dengan huruf ya bro mba sis!!!',
+            'numeric' => ':attribute harus diisi dengan angka ya bro mba sis!!!',
+            'unique' => ':attribute tidak boleh sama ya bro mba sis!!!',
         ];
 
         $this->validate($request,[
-            'kode_kota' => 'required|numeric',
-            'nama_kota' => 'required|min:8|max:30',
+            'kode_kota' => 'required|numeric|unique:kotas|max:3',
+            'nama_kota' => 'required|alpha|unique:kotas|max:30',
             'id_provinsi' => 'required|numeric',
         ],$messages);
         
