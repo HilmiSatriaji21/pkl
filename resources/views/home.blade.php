@@ -14,7 +14,9 @@
                         </div>
                     @endif
 
-                    <b><center><h3> ホームヤード </h3></center></b>
+                    <hr><b><center><h3> ホームヤード </h3></center></b>
+                    <hr>
+                    <b><center>~ 著作権2021 ~</center></b>
                 </div>
             </div>
         </div>

@@ -8,6 +8,16 @@
                 <div class="card-header">{{ __('Tambah Data Rw') }}</div>
 
                 <div class="card-body">
+                {{-- menampilkan error validasi --}}
+                            @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
                     
                     <form action="{{ route('rw.store')}}" method="POST">
                         @csrf

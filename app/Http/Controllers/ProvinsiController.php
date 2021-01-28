@@ -46,7 +46,7 @@ class ProvinsiController extends Controller
 
         $this->validate($request,[
             'kode_provinsi' => 'required|numeric|unique:provinsis|max:4',
-            'nama_provinsi' => 'required|alpha_num|unique:provinsis|max:30',
+            'nama_provinsi' => 'required|alpha_num|unique:provinsis|min:5|max:30',
         ],$messages);
 
         $provinsi->kode_provinsi = $request->kode_provinsi;
