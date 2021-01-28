@@ -23,7 +23,7 @@
                             <thead>
                                 <tr>
                                     <th>Nomor</th>
-                                    <th>Kode Negara</th>
+                                    <th>Kode Provinsi</th>
                                     <th>Nama Negara</th>
                                     <th>Aksi</th>
                                 </tr>

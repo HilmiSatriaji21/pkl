@@ -26,15 +26,9 @@ class ProvinsiController extends Controller
         return view('provinsi.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        
+        $provinsi = new Provinsi();
         $messages = [
             'required' => ':attribute wajib diisi ya bro mba sis!!!',
             'min' => ':attribute harus diisi minimal :min karakter ya bro mba sis!!!',
@@ -52,42 +46,25 @@ class ProvinsiController extends Controller
         $provinsi->kode_provinsi = $request->kode_provinsi;
         $provinsi->nama_provinsi = $request->nama_provinsi;
         $provinsi->save();
-        return redirect()->route('provinsi.index');
+        return redirect()->route('provinsi.index')
+                ->with(['message'=>'Data Provinsi Berhasil Di Buat']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\provinsi  $provinsi
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $provinsi = Provinsi::findOrFail($id);
         return view('provinsi.show',compact('provinsi'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\provinsi  $provinsi
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-       $provinsi = Provinsi::findOrFail($id);
-       return view('provinsi.edit', compact('provinsi'));
+        $provinsi = Provinsi::findOrFail($id);
+        return view('provinsi.edit',compact('provinsi'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\provinsi  $provinsi
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update($id,Request $request)
     {
+        $provinsi = Provinsi::findOrFail($id);
         $messages = [
             'required' => ':attribute wajib diisi ya bro mba sis!!!',
             'min' => ':attribute harus diisi minimal :min karakter ya bro mba sis!!!',
@@ -99,26 +76,19 @@ class ProvinsiController extends Controller
 
         $this->validate($request,[
             'kode_provinsi' => 'required|numeric|unique:provinsis|max:4',
-            'nama_provinsi' => 'required|alpha_num|unique:provinsis|max:30',
+            'nama_provinsi' => 'required|alpha_num|unique:provinsis|min:5|max:30',
         ],$messages);
-
-        $provinsi = Provinsi::findOrFail($id);
+        
         $provinsi->kode_provinsi = $request->kode_provinsi;
         $provinsi->nama_provinsi = $request->nama_provinsi;
         $provinsi->save();
-        return redirect()->route('provinsi.index');
+        return redirect()->route('provinsi.index')
+                ->with(['message'=>'Data Provinsi Berhasil Di Edit']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\provinsi  $provinsi
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $provinsi = Provinsi::findOrFail($id)->delete();
-        return redirect()->route('provinsi.index')
-                        ->with(['message1'=>'Berhasil dihapus']);
+        return redirect()->route('provinsi.index')->with(['message'=>'Data Provinsi Berhasil Di Hapus']);
     }
 }
