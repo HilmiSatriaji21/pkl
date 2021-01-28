@@ -50,14 +50,15 @@ class KelurahanController extends Controller
         ];
 
         $this->validate($request,[
-            'nama_kelurahan' => 'required|alpha|unique:kelurahans|max:30',
+            'nama_kelurahan' => 'required|regex:/^[a-z A-Z]+$/u|unique:kelurahans|max:30',
             'id_kecamatan' => 'required|numeric',
         ],$messages);
 
         $kelurahan->nama_kelurahan = $request->nama_kelurahan;
         $kelurahan->id_kecamatan = $request->id_kecamatan; 
         $kelurahan->save();
-        return redirect()->route('kelurahan.index');
+        return redirect()->route('kelurahan.index')
+        ->with(['message'=>'Data Kelurahan Berhasil Di Tambah']);
     }
 
     /**
@@ -104,14 +105,15 @@ class KelurahanController extends Controller
         ];
 
         $this->validate($request,[
-            'nama_kelurahan' => 'required|alpha|unique:kelurahans|max:30',
+            'nama_kelurahan' => 'required|regex:/^[a-z A-Z]+$/u|unique:kelurahans|max:30',
             'id_kecamatan' => 'required|numeric',
         ],$messages);
         
         $kelurahan->nama_kelurahan = $request->nama_kelurahan;
         $kelurahan->id_kecamatan = $request->id_kecamatan; 
         $kelurahan->save();
-        return redirect()->route('kelurahan.index');
+        return redirect()->route('kelurahan.index')
+        ->with(['message'=>'Data Kelurahan Berhasil Di Edit']);
     }
 
     /**
@@ -123,6 +125,7 @@ class KelurahanController extends Controller
     public function destroy($id)
     {
         $kelurahan = Kelurahan::findOrFail($id)->delete();
-        return redirect()->route('kelurahan.index');
+        return redirect()->route('kelurahan.index')
+        ->with(['message'=>'Data Kelurahan Berhasil Di Hapus']);
     }
 }

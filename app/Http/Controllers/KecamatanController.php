@@ -52,7 +52,7 @@ class KecamatanController extends Controller
 
         $this->validate($request,[
             'kode_kecamatan' => 'required|numeric|unique:kecamatans|max:3',
-            'nama_kecamatan' => 'required|alpha|unique:kecamatans|max:30',
+            'nama_kecamatan' => 'required|regex:/^[a-z A-Z]+$/u|unique:kecamatans|max:30',
             'id_kota' => 'required|numeric',
         ],$messages);
 
@@ -61,7 +61,8 @@ class KecamatanController extends Controller
         $kecamatan->nama_kecamatan = $request->nama_kecamatan;
         $kecamatan->id_kota = $request->id_kota; 
         $kecamatan->save();
-        return redirect()->route('kecamatan.index');
+        return redirect()->route('kecamatan.index')
+        ->with(['message'=>'Data Kecamatan Berhasil Di Tambah']);
     }
 
     /**
@@ -110,7 +111,7 @@ class KecamatanController extends Controller
 
         $this->validate($request,[
             'kode_kecamatan' => 'required|numeric|unique:kecamatans|max:3',
-            'nama_kecamatan' => 'required|alpha|unique:kecamatans|max:30',
+            'nama_kecamatan' => 'required|regex:/^[a-z A-Z]+$/u|unique:kecamatans|max:30',
             'id_kota' => 'required|numeric',
         ],$messages);
         
@@ -118,7 +119,8 @@ class KecamatanController extends Controller
         $kecamatan->nama_kecamatan = $request->nama_kecamatan;
         $kecamatan->id_kota = $request->id_kota;
         $kecamatan->save();
-        return redirect()->route('kecamatan.index');
+        return redirect()->route('kecamatan.index')
+        ->with(['message'=>'Data Kecamatan Berhasil Di Edit']);
     }
 
     /**
@@ -130,6 +132,7 @@ class KecamatanController extends Controller
     public function destroy($id)
     {
         $kecamatan = Kecamatan::findOrFail($id)->delete();
-        return redirect()->route('kecamatan.index');
+        return redirect()->route('kecamatan.index')
+        ->with(['message'=>'Data Kecamatan Berhasil Di Hapus']);
     }
 }

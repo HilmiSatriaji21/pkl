@@ -56,7 +56,8 @@ class RwController extends Controller
         $rw->nama_rw = $request->nama_rw;
         $rw->id_kelurahan = $request->id_kelurahan; 
         $rw->save();
-        return redirect()->route('rw.index');
+        return redirect()->route('rw.index')
+        ->with(['message'=>'Data Rw Berhasil Di Tambah']);
     }
 
     /**
@@ -110,7 +111,8 @@ class RwController extends Controller
         $rw->nama_rw = $request->nama_rw;
         $rw->id_kelurahan = $request->id_kelurahan; 
         $rw->save();
-        return redirect()->route('rw.index');
+        return redirect()->route('rw.index')
+        ->with(['message'=>'Data Rw Berhasil Di Edit']);
     }
 
     /**
@@ -122,6 +124,7 @@ class RwController extends Controller
     public function destroy($id)
     {
         $rw = Rw::findOrFail($id)->delete();
-        return redirect()->route('rw.index');
+        return redirect()->route('rw.index')
+        ->with(['message'=>'Data Rw Berhasil Di Hapus']);
     }
 }

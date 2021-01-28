@@ -52,7 +52,7 @@ class KotaController extends Controller
 
         $this->validate($request,[
             'kode_kota' => 'required|numeric|unique:kotas|max:3',
-            'nama_kota' => 'required|alpha|unique:kotas|max:30',
+            'nama_kota' => 'required|regex:/^[a-z A-Z]+$/u|unique:kotas|max:30',
             'id_provinsi' => 'required|numeric',
         ],$messages);
 
@@ -60,7 +60,8 @@ class KotaController extends Controller
         $kota->nama_kota = $request->nama_kota;
         $kota->id_provinsi = $request->id_provinsi; 
         $kota->save();
-        return redirect()->route('kota.index');
+        return redirect()->route('kota.index')
+        ->with(['message'=>'Data Kota Berhasil Di Tambah']);
     }
 
     /**
@@ -108,7 +109,7 @@ class KotaController extends Controller
 
         $this->validate($request,[
             'kode_kota' => 'required|numeric|unique:kotas|max:3',
-            'nama_kota' => 'required|alpha|unique:kotas|max:30',
+            'nama_kota' => 'required|regex:/^[a-z A-Z]+$/u|unique:kotas|max:30',
             'id_provinsi' => 'required|numeric',
         ],$messages);
         
@@ -117,7 +118,8 @@ class KotaController extends Controller
         $kota->nama_kota = $request->nama_kota;
         $kota->id_provinsi = $request->id_provinsi;
         $kota->save();
-        return redirect()->route('kota.index');
+        return redirect()->route('kota.index')
+        ->with(['message'=>'Data Kota Berhasil Di Edit']);
     }
 
     /**
@@ -129,6 +131,7 @@ class KotaController extends Controller
     public function destroy($id)
     {
         $kota = Kota::findOrFail($id)->delete();
-        return redirect()->route('kota.index');
+        return redirect()->route('kota.index')
+        ->with(['message'=>'Data Kota Berhasil Di Hapus']);
     }
 }
