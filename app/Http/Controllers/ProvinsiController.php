@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\provinsi;
-use App\Http\Controllers\DB; 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 
 class ProvinsiController extends Controller
@@ -15,6 +16,7 @@ class ProvinsiController extends Controller
         $provinsi = Provinsi::all();
         return view('provinsi.index', compact('provinsi'));  
     }
+
 
     /**
      * Show the form for creating a new resource.

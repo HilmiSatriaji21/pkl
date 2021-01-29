@@ -91,9 +91,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="kasus2" class="nav-link">
+                <a href="laporan" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Rekap Kasus</p>
+                  <p>Rekap Laporan</p>
                 </a>
               </li>
             </ul>

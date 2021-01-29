@@ -2,23 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\kasus2;
-use App\Models\rw;
-use App\Http\Controllers\DB; ###
+use App\Models\Laporan;
+use App\Models\Rw;
 use Illuminate\Http\Request;
 
-class Kasus2Controller extends Controller
+class LaporanController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     
     public function index()
     {
-        $laporan= Kasus2::with('rw')->get();
-        return view('kasus2.index', compact('laporan'));
+        $laporan = Laporan::with('rw.kelurahan.kecamatan.kota.provinsi')->get();
+        return view('laporan.index',compact('laporan'));
     }
 
     /**
@@ -29,7 +32,7 @@ class Kasus2Controller extends Controller
     public function create()
     {
         $rw = Rw::all();
-        return view('kasus2.create', compact('rw'));
+        return view('laporan.create',compact('rw'));
     }
 
     /**
@@ -40,69 +43,71 @@ class Kasus2Controller extends Controller
      */
     public function store(Request $request)
     {
-        $laporan= new Kasus2();
-        $laporan->positif = $request->positif;
+        $laporan = new Laporan;
         $laporan->id_rw = $request->id_rw;
-        $laporan->meninggal = $request->meninggal;
+        $laporan->positif = $request->positif;
         $laporan->sembuh = $request->sembuh;
+        $laporan->meninggal = $request->meninggal;
         $laporan->tanggal = $request->tanggal;
         $laporan->save();
-        return redirect()->route('kasus2.index');
+        return redirect()->route('laporan.index')
+        ->with(['message'=>'Data Berhasil Dibuat']);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\kasus2  $laporan
+     * @param  \App\Models\laporan  $laporan
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $laporan = Kasus2::findOrFail($id);
-        return view('kasus2.show',compact('laporan'));
+        $laporan = Laporan::findOrFail($id);
+        return view('laporan.show',compact('laporan'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\kasus2 $laporan
+     * @param  \App\Models\laporan  $laporan
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit( $id)
     {
-        $rw = Rw::all();
-        $laporan = Kasus2::findOrFail($id);
-        return view('kasus2.edit',compact('laporan','rw'));
+        $laporan = Laporan::findOrFail($id);
+        return view('laporan.edit',compact('laporan'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\kasus2  $laporan
+     * @param  \App\Models\laporan  $laporan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,  $id)
     {
-        $laporan= new Kasus2();
-        $laporan->positif = $request->positif;
+        $laporan = Laporan::findOrFail($id);
         $laporan->id_rw = $request->id_rw;
-        $laporan->meninggal = $request->meninggal;
+        $laporan->positif = $request->positif;
         $laporan->sembuh = $request->sembuh;
+        $laporan->meninggal = $request->meninggal;
         $laporan->tanggal = $request->tanggal;
         $laporan->save();
-        return redirect()->route('kasus2.index');
+        return redirect()->route('laporan.index')
+        ->with(['message'=>'Data Berhasil Diedit']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\kasus2 $laporan
+     * @param  \App\Models\laporan  $laporan
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $laporan = Kasus2::findOrFail($id)->delete();
-        return redirect()->route('kasus2.index');
+        $laporan = Laporan::findOrFail($id)->delete();
+        return redirect()->route('laporan.index')
+                        ->with(['message1'=>'Data Berhasil Dihapus']);
     }
 }

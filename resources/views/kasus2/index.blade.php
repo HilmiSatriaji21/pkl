@@ -31,7 +31,7 @@
                             </thead>
                             <tbody>
                                 @php $no=1; @endphp
-                                @foreach($kasus2 as $data)
+                                @foreach($laporan as $data)
                                 <tr>
                                     <td>{{$no++}}</td>
                                     <td>{{$data->positif}}</td>

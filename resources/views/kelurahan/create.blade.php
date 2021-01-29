@@ -7,7 +7,8 @@
             <div class="card">
                 <div class="card-header">{{ __('Tambah Data Kelurahan') }}</div>
 
-                <div class="card-body">{{-- menampilkan error validasi --}}
+                <div class="card-body">
+                {{-- menampilkan error validasi --}}
                             @if (count($errors) > 0)
                             <div class="alert alert-danger">
                                 <ul>
