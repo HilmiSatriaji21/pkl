@@ -13,33 +13,33 @@
                 <div class="card-header">
                     Data Kelurahan
                     <a href="{{route('kelurahan.create')}}" class="float-right">
-                    <button type="submit" class="btn btn-danger">Tambah Data</button></a>
+                    <button type="submit" class="btn btn-danger">Tambah Data <i class="fa fa-plus"></button></i></a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="datatable">
+                        <table class="table table-bordered table-striped" id="datatable">
                             <thead>
-                                <tr>
-                                    <th>Nomor</th>
-                                    <th>Nama Kecamatan</th>
-                                    <th>Nama Kelurahan</th>
-                                    <th>Action</th>
+                            <tr class="bg-black">
+                            <th scope="col"><center>Nomor</center></th>
+                                    <th><center>Nama Kecamatan</th>
+                                    <th><center>Nama Kelurahan</th>
+                                    <th><center>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php $no=1; @endphp
                                 @foreach($kelurahan as $data)
                                 <tr>
-                                    <td>{{$no++}}</td>
-                                    <td>{{$data->kecamatan->nama_kecamatan}}</td>
-                                    <td>{{$data->nama_kelurahan}}</td>
+                                    <td><center><b>{{$no++}}</td>
+                                    <td><center><b>{{$data->kecamatan->nama_kecamatan}}</td>
+                                    <td><center><b>{{$data->nama_kelurahan}}</td>
                                     <td>
                                         <form action="{{route('kelurahan.destroy',$data->id)}}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <a href="{{route('kelurahan.show',$data->id)}}" class="btn btn-sm btn-success">Lihat</a> 
-                                            <a href="{{route('kelurahan.edit',$data->id)}}" class="btn btn-sm btn-warning">Edit</a> 
-                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete ?')">Hapus</button>
+                                            <a href="{{route('kelurahan.edit',$data->id)}}" class="btn btn-sm btn-warning">Edit<i class="fa fa-edit"></a></i>
+                                            <a href="{{route('kelurahan.show',$data->id)}}" class="btn btn-sm btn-success">Show<i class="fa fa-eye"></a></i>
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda Yakin ?')">Hapus<i class="fa fa-trash-alt"></i>
                                         </form>
                                     </td>
                                 </tr>

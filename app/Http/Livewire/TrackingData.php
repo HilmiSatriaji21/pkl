@@ -7,7 +7,7 @@ use App\Models\Kelurahan;
 use App\Models\Kecamatan;
 use App\Models\Kota;
 use App\Models\Provinsi;
-use App\Models\Tracking;
+use App\Models\Laporan;
 use Livewire\Component;
 
 class TrackingData extends Component
@@ -17,7 +17,7 @@ class TrackingData extends Component
     public $kecamatan;
     public $kelurahan;
     public $rw;
-    public $tracking1;
+    public $laporan;
     public $idt;
 
     public $selectedProvinsi = null;
@@ -29,28 +29,18 @@ class TrackingData extends Component
     public function mount($selectedRw = null, $idt = null)
     {
         $this->provinsi = Provinsi::all();
-              
-        $this->kota = Kota::with('provinsi')->get();
-        $this->kecamatan = Kecamatan::whereHas('kota', function ($query) {
-            $query->whereId(request()->input('id_kota', 0));
-        })->pluck('nama_kecamatan', 'id');
-        $this->kelurahan = Kelurahan::whereHas('kecamatan', function ($query) {
-            $query->whereId(request()->input('id_kecamatan', 0));
-        })->pluck('nama_kelurahan', 'id');
-        $this->rw = Rw::whereHas('kelurahan', function ($query) {
-            $query->whereId(request()->input('id_kelurahan', 0));
-        })->pluck('nama_rw', 'id');
+        $this->kotas = collect();
+        $this->kecamatans= collect();
+        $this->kelurahans = collect();
+        $this->rws = collect();
         $this->selectedRw = $selectedRw;
-        $this->idt = $idt;
-        if (!is_null($idt)) {
-            $this->tracking1 = Tracking::findOrFail($idt);
-        }
+              
 
         if (!is_null($selectedRw)) {
             $rw = Rw::with('kelurahan.kecamatan.kota.provinsi')->find($selectedRw);
             
             if ($rw) {
-                $this->rw = RW::where('id_kelurahan', $rw->id_kelurahan)->get();
+                $this->rw = Rw::where('id_kelurahan', $rw->id_kelurahan)->get();
                 $this->kelurahan = Kelurahan::where('id_kecamatan', $rw->kelurahan->id_kecamatan)->get();
                 $this->kecamatan = Kecamatan::where('id_kota', $rw->kelurahan->kecamatan->id_kota)->get();
                 $this->kota = Kota::where('id_provinsi', $rw->kelurahan->kecamatan->kota->id_provinsi)->get();

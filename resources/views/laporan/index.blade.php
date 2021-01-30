@@ -31,16 +31,16 @@
 
             <div class="card">
                 <div class="card-header">{{ __('Data Tracking') }}
-                <a href="{{route('laporan.create')}}" class="float-right btn btn-success">Add Data</a>
+                <a href="{{route('laporan.create')}}" class="float-right btn btn-success">Tambah Data <i class="fa fa-plus"></button></i></a>
             </div>
 
             <div class="card-body">
             <table id="example1" class="table table-bordered table-striped">
                     <thead>
-                      <tr class="bg-teal">
+                      <tr class="bg-black">
                       <th scope="col">No</th>
                                             <th scope="col"><center>Lokasi</center></th>
-                                            <th scope="col"><center>RW</center></th>
+                                            <th scope="col"><center>Rw</center></th>
                                             <th scope="col"><center>Positif</center></th>
                                             <th scope="col"><center>Sembuh</center></th>
                                             <th scope="col"><center>Meninggal</center></th>
@@ -54,23 +54,23 @@
                                     @foreach($laporan as $data)
 
                                         <tr>
-                                            <th scope="row"><center>{{$no++}}</center></th>
-                                            <td><center>Kelurahan : {{$data->rw->kelurahan->nama_kelurahan}}<br>
+                                            <th scope="row"><center><b>{{$no++}}</center></th>
+                                            <td><center><b>Kelurahan : {{$data->rw->kelurahan->nama_kelurahan}}<br>
                                             Kecamatan : {{$data->rw->kelurahan->kecamatan->nama_kecamatan}}<br>
                                             Kota : {{$data->rw->kelurahan->kecamatan->kota->nama_kota}}<br>
                                             Provinsi : {{$data->rw->kelurahan->kecamatan->kota->provinsi->nama_provinsi}}</center></td>
-                                            <td><center>{{$data->rw->nama_rw}}</center></td>
-                                            <td><center>{{$data->positif}}</center></td>
-                                            <td><center>{{$data->sembuh}}</center></td>
-                                            <td><center>{{$data->meninggal}}</center></td>
-                                            <td><center>{{$data->tanggal}}</center></td>
+                                            <td><center><b>{{$data->rw->nama_rw}}</center></td>
+                                            <td><center><b>{{$data->positif}}</center></td>
+                                            <td><center><b>{{$data->sembuh}}</center></td>
+                                            <td><center><b>{{$data->meninggal}}</center></td>
+                                            <td><center><b>{{$data->tanggal}}</center></td>
                                             <td>
                                             <form action="{{route('laporan.destroy',$data->id)}}"  method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <center>
-                                            <a href="{{route('laporan.edit',$data->id)}}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></a></i>
-                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin Hapus?')"><i class="fa fa-trash-alt">
+                                            <a href="{{route('laporan.edit',$data->id)}}" class="btn btn-sm btn-warning">Edit<i class="fa fa-edit"></a></i>
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda Yakin ?')">Hapus<i class="fa fa-trash-alt"></i>
                                             </form>
                                         </tr>
                                     @endforeach
@@ -83,23 +83,4 @@
     </div>
 </div>
 </div>
-@endsection
-
-@section('js')
-<script src="{{asset('assets/plugins/datatables/jquery.dataTables.js')}}"></script>
-<script src="{{asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
-
-<script>
-  $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-    });
-  });
-</script>
 @endsection
