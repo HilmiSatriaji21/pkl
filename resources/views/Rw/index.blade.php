@@ -11,7 +11,7 @@
             @endif
             <div class="card">
                 <div class="card-header">
-                    Data Rw
+                    <h4>Data Rw</h4>
                     <a href="{{route('rw.create')}}" class="float-right">
                     <button type="submit" class="btn btn-danger">Tambah Data <i class="fa fa-plus"></button></i></a>
                 </div>

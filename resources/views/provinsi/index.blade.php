@@ -11,7 +11,7 @@
             @endif
             <div class="card">
                 <div class="card-header">
-                    Data Provinsi
+                    <h4>Data Provinsi</h4>
                     <a href="{{route('provinsi.create')}}" class="float-right">
                     <button type="submit" class="btn btn-danger">Tambah Data <i class="fa fa-plus"></button></i>
                     </a>

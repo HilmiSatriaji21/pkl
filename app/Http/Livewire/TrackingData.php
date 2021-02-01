@@ -29,12 +29,23 @@ class TrackingData extends Component
     public function mount($selectedRw = null, $idt = null)
     {
         $this->provinsi = Provinsi::all();
-        $this->kotas = collect();
-        $this->kecamatans= collect();
-        $this->kelurahans = collect();
-        $this->rws = collect();
         $this->selectedRw = $selectedRw;
               
+        $this->kota = Kota::with('provinsi')->get();
+        $this->kecamatan = Kecamatan::whereHas('kota', function ($query) {
+            $query->whereId(request()->input('id_kota', 0));
+        })->pluck('nama_kecamatan', 'id');
+        $this->kelurahan = Kelurahan::whereHas('kecamatan', function ($query) {
+            $query->whereId(request()->input('id_kecamatan', 0));
+        })->pluck('nama_kelurahan', 'id');
+        $this->rw = Rw::whereHas('kelurahan', function ($query) {
+            $query->whereId(request()->input('id_kelurahan', 0));
+        })->pluck('nama_rw', 'id');
+        $this->selectedRw = $selectedRw;
+        $this->idt = $idt;
+        if (!is_null($idt)) {
+            $this->laporan = Laporan::findOrFail($idt);
+        }
 
         if (!is_null($selectedRw)) {
             $rw = Rw::with('kelurahan.kecamatan.kota.provinsi')->find($selectedRw);
