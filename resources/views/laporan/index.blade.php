@@ -30,15 +30,15 @@
             @endif
 
             <div class="card">
-                <div class="card-header"><h4>Data Laporan</h4>
-                <a href="{{route('laporan.create')}}" class="float-right btn btn-success">Tambah Data <i class="fa fa-plus"></button></i></a>
+                <div class="card-header"><h4><mark style="background-color: orange">Data Laporan</mark></h4>
+                <a href="{{route('laporan.create')}}" class="float-right btn btn-danger">Tambah Data <i class="fa fa-plus"></button></i></a>
             </div>
 
             <div class="card-body">
             <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr class="bg-black">
-                      <th scope="col">No</th>
+                                            <th scope="col"><center>Nomor</center></th>
                                             <th scope="col"><center>Lokasi</center></th>
                                             <th scope="col"><center>Rw</center></th>
                                             <th scope="col"><center>Positif</center></th>

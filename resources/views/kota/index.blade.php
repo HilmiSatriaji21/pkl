@@ -11,7 +11,7 @@
             @endif
             <div class="card">
                 <div class="card-header">
-                    <h4>Data Kota</h4>
+                    <h4><mark style="background-color: orange">Data Kota</mark></h4>
                     <a href="{{route('kota.create')}}" class="float-right">
                     <button type="submit" class="btn btn-danger">Tambah Data <i class="fa fa-plus"></button></i></a>
                 </div>
@@ -39,7 +39,7 @@
                                         <form action="{{route('kota.destroy',$data->id)}}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <a href="{{route('kota.edit',$data->id)}}" class="btn btn-sm btn-warning">Edit<i class="fa fa-edit"></a></i>
+                                            <center><a href="{{route('kota.edit',$data->id)}}" class="btn btn-sm btn-warning">Edit<i class="fa fa-edit"></a></i>
                                             <a href="{{route('kota.show',$data->id)}}" class="btn btn-sm btn-success">Show<i class="fa fa-eye"></a></i>
                                             <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda Yakin ?')">Hapus<i class="fa fa-trash-alt"></i>
                                         </form>
