@@ -85,14 +85,20 @@ class ApiController extends Controller
         ->join('kecamatans', 'kecamatans.id', '=', 'kelurahans.id_kecamatan')
         ->join('kotas', 'kotas.id', '=', 'kecamatans.id_kota')
         ->join('provinsis', 'provinsis.id', '=', 'kotas.id_provinsi')->where('provinsis.id', $id)
-        ->groupBy('provinsis.nama_provinsi')
-    ->get();           
-$res = [
-    'success'   => true,
-    'data'      => $data,
-    'message'   => 'Data kasus ditampilkan'
-];
-return response()->json($res,200);
+        ->groupBy('provinsis.nama_provinsi')->get(); 
+        if ($data){
+            return response()->json([
+                'success' => true,
+                'message' => 'Detail Provinsi',
+                'data'    => $data
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Provinsi Tidak Ditemukan',
+                'data'    => ''
+            ], 404);
+        }          
     }
 
     /**

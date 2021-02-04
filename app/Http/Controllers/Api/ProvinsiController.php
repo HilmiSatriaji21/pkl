@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use DB;
 use App\Models\Provinsi;
 use Validator; 
 
@@ -14,15 +15,31 @@ class ProvinsiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $provinsi = Provinsi::latest()->get();
-        $prov = [
-            'success' => true,
-            'data'    => $provinsi,
-            'message' => 'Data Provinsi Ditampilkan'
+        public function index()
+    {   
+        
+        $positif = DB::table('rws')
+        ->select('laporans.positif','laporans.sembuh','laporans.meninggal')
+        ->join('laporans','rws.id','=','laporans.id_rw')
+        ->sum('laporans.positif');
+        $meninggal = DB::table('rws')
+        ->select('laporans.positif','laporans.sembuh','laporans.meninggal')
+        ->join('laporans','rws.id','=','laporans.id_rw')
+        ->sum('laporans.meninggal');
+        $sembuh = DB::table('rws')
+        ->select('laporans.positif','laporans.sembuh','laporans.meninggal')
+        ->join('laporans','rws.id','=','laporans.id_rw')
+        ->sum('laporans.sembuh');
+
+        $res = [
+            'success'    => true,
+            'data'       => 'Data kasus indonesia',
+            'positif'    => $positif,
+            'meninggal'  => $meninggal,
+            'sembuh'     => $sembuh,
+            'message'    => 'Data kasus ditampilkan'
         ];
-        return response()->json($prov, 200);
+        return response()->json($res,200);
     }
 
     /**
