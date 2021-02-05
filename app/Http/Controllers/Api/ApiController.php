@@ -83,6 +83,66 @@ class ApiController extends Controller
         ];
         return response()->json($rest, 200);
     }
+    public function kota_index()
+    {
+        //Data Kota 
+        $data = DB::table('kotas')
+        ->join('kecamatans','kecamatans.id_kota', '=', 'kotas.id')
+        ->join('kelurahans','kelurahans.id_kecamatan', '=', 'kecamatans.id')
+        ->join('rws','rws.id_kelurahan', '=', 'kelurahans.id')
+        ->join('laporans','laporans.id_rw', '=', 'rws.id')
+        ->select('nama_kota',
+        DB::raw('sum(laporans.positif) as positif'),
+        DB::raw('sum(laporans.meninggal) as meninggal'),
+        DB::raw('sum(laporans.sembuh) as sembuh'))
+        ->groupBy('nama_kota')
+        ->get();
+                $res = [
+                    'succsess' => true,
+                    'Data' => $data,
+                    'message' => 'Data Kasus Di Tampilkan'
+                ];
+                return response()->json($res,200);
+    }
+    public function kecamatan_index()
+    {
+        //Data Kecamatan 
+        $data = DB::table('kecamatans')
+        ->join('kelurahans','kelurahans.id_kecamatan', '=', 'kecamatans.id')
+        ->join('rws','rws.id_kelurahan', '=', 'kelurahans.id')
+        ->join('laporans','laporans.id_rw', '=', 'rws.id')
+        ->select('nama_kecamatan',
+        DB::raw('sum(laporans.positif) as positif'),
+        DB::raw('sum(laporans.meninggal) as meninggal'),
+        DB::raw('sum(laporans.sembuh) as sembuh'))
+        ->groupBy('nama_kecamatan')
+        ->get();
+                $res = [
+                    'succsess' => true,
+                    'Data' => $data,
+                    'message' => 'Data Kasus Di Tampilkan'
+                ];
+                return response()->json($res,200);
+    }
+    public function kelurahan_index()
+    {
+        //Data Kelurahan
+        $data = DB::table('kelurahans')
+        ->join('rws','rws.id_kelurahan', '=', 'kelurahans.id')
+        ->join('laporans','laporans.id_rw', '=', 'rws.id')
+        ->select('nama_kelurahan',
+        DB::raw('sum(laporans.positif) as positif'),
+        DB::raw('sum(laporans.meninggal) as meninggal'),
+        DB::raw('sum(laporans.sembuh) as sembuh'))
+        ->groupBy('nama_kelurahan')
+        ->get();
+                $res = [
+                    'succsess' => true,
+                    'Data' => $data,
+                    'message' => 'Data Kasus Di Tampilkan'
+                ];
+                return response()->json($res,200);
+    }
 
     public function showprovinsi($id)
     {
