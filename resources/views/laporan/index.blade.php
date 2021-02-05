@@ -31,7 +31,7 @@
 
             <div class="card">
                 <div class="card-header"><h4><mark style="background-color: orange">Data Laporan</mark></h4>
-                <a href="{{route('laporan.create')}}" class="float-right btn btn-danger">Tambah Data <i class="fa fa-plus"></button></i></a>
+                <a href="{{route('laporan.create')}}" class="float-right btn btn-danger">Tambah Data <i class="fa fa-plus-square"></button></i></a>
             </div>
 
             <div class="card-body">
@@ -69,7 +69,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <center>
-                                            <a href="{{route('laporan.edit',$data->id)}}" class="btn btn-sm btn-warning">Edit<i class="fa fa-edit"></a></i>
+                                            <a href="{{route('laporan.edit',$data->id)}}" class="btn btn-sm btn-warning">Edit<i class="fa fa-cog fa-spin"></a></i>
                                             <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda Yakin ?')">Hapus<i class="fa fa-trash-alt"></i>
                                             </form>
                                         </tr>

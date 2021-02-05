@@ -13,7 +13,7 @@
                 <div class="card-header">
                     <h4><mark style="background-color: orange">Data Provinsi</mark></h4>
                     <a href="{{route('provinsi.create')}}" class="float-right">
-                    <button type="submit" class="btn btn-danger">Tambah Data <i class="fa fa-plus"></button></i>
+                    <button type="submit" class="btn btn-danger">Tambah Data <i class="fa fa-plus-square"></button></i>
                     </a>
                 </div>
                 <div class="card-body">
@@ -39,7 +39,7 @@
                                             @csrf
                                             @method('DELETE')
                                             
-                                            <center><a href="{{route('provinsi.edit',$data->id)}}" class="btn btn-sm btn-warning">Edit<i class="fa fa-edit"></a></i>
+                                            <center><a href="{{route('provinsi.edit',$data->id)}}" class="btn btn-sm btn-warning">Edit<i class="fa fa-cog fa-spin"></a></i>
                                             <a href="{{route('provinsi.show',$data->id)}}" class="btn btn-sm btn-success">Show<i class="fa fa-eye"></a></i>
                                             <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda Yakin ?')"><i class="fa fa-trash-alt"></i>
                                                 Hapus
