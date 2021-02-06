@@ -86,6 +86,24 @@ class ApiController extends Controller
     public function kota_index()
     {
         //Data Kota 
+        $hariini = Carbon::now()->format('d-m-y'); 
+        $data_skrg = DB::table('laporans')
+                ->select(DB::raw('kotas.id'),
+                         DB::raw('kotas.nama_kota as Kota'),
+                         DB::raw('SUM(laporans.positif) as Positif'),
+                         DB::raw('SUM(laporans.sembuh) as Sembuh'),
+                         DB::raw('SUM(laporans.meninggal) as Meninggal'),
+                         DB::raw('MAX(tanggal) as Tanggal'))
+                         ->whereDay('tanggal', '=' , $hariini)
+                ->join('rws' , 'rws.id', 'laporans.id_rw',)
+                ->join('kelurahans' ,'kelurahans.id', '=', 'rws.id_kelurahan')
+                ->join('kecamatans' ,'kecamatans.id', '=', 'kelurahans.id_kecamatan')
+                ->join('kotas' ,'kotas.id', '=', 'kecamatans.id_kota')
+                ->join('provinsis' ,'provinsis.id', '=', 'kotas.id_provinsi')
+                ->whereDate('laporans.tanggal', date('Y-m-d'))
+                ->groupby('provinsis.id')
+                ->get();
+
         $data = DB::table('kotas')
         ->join('kecamatans','kecamatans.id_kota', '=', 'kotas.id')
         ->join('kelurahans','kelurahans.id_kecamatan', '=', 'kecamatans.id')
@@ -97,16 +115,37 @@ class ApiController extends Controller
         DB::raw('sum(laporans.sembuh) as sembuh'))
         ->groupBy('nama_kota')
         ->get();
-                $res = [
-                    'succsess' => true,
-                    'Data' => $data,
-                    'message' => 'Data Kasus Di Tampilkan'
-                ];
-                return response()->json($res,200);
+        $rest = [
+            'status' => 200,
+            'data' => [ 
+                'Hari Ini' =>[$data_skrg],
+                'Total' =>[$data]
+            ],
+            'message' => 'Data Kasus Kota Ditampilkan'
+        ];
+        return response()->json($rest, 200);
     }
     public function kecamatan_index()
     {
         //Data Kecamatan 
+        $hariini = Carbon::now()->format('d-m-y'); 
+        $data_skrg = DB::table('laporans')
+                ->select(DB::raw('kecamatans.id'),
+                         DB::raw('kecamatans.nama_kecamatan as Kecamatan'),
+                         DB::raw('SUM(laporans.positif) as Positif'),
+                         DB::raw('SUM(laporans.sembuh) as Sembuh'),
+                         DB::raw('SUM(laporans.meninggal) as Meninggal'),
+                         DB::raw('MAX(tanggal) as Tanggal'))
+                         ->whereDay('tanggal', '=' , $hariini)
+                ->join('rws' , 'rws.id', 'laporans.id_rw',)
+                ->join('kelurahans' ,'kelurahans.id', '=', 'rws.id_kelurahan')
+                ->join('kecamatans' ,'kecamatans.id', '=', 'kelurahans.id_kecamatan')
+                ->join('kotas' ,'kotas.id', '=', 'kecamatans.id_kota')
+                ->join('provinsis' ,'provinsis.id', '=', 'kotas.id_provinsi')
+                ->whereDate('laporans.tanggal', date('Y-m-d'))
+                ->groupby('provinsis.id')
+                ->get();
+
         $data = DB::table('kecamatans')
         ->join('kelurahans','kelurahans.id_kecamatan', '=', 'kecamatans.id')
         ->join('rws','rws.id_kelurahan', '=', 'kelurahans.id')
@@ -117,16 +156,37 @@ class ApiController extends Controller
         DB::raw('sum(laporans.sembuh) as sembuh'))
         ->groupBy('nama_kecamatan')
         ->get();
-                $res = [
-                    'succsess' => true,
-                    'Data' => $data,
-                    'message' => 'Data Kasus Di Tampilkan'
-                ];
-                return response()->json($res,200);
+        $rest = [
+            'status' => 200,
+            'data' => [ 
+                'Hari Ini' =>[$data_skrg],
+                'Total' =>[$data]
+            ],
+            'message' => 'Data Kasus Kecamatan Ditampilkan'
+        ];
+        return response()->json($rest, 200);
     }
     public function kelurahan_index()
     {
         //Data Kelurahan
+        $hariini = Carbon::now()->format('d-m-y'); 
+        $data_skrg = DB::table('laporans')
+                ->select(DB::raw('kelurahans.id'),
+                         DB::raw('kelurahans.nama_kelurahan as Kelurahan'),
+                         DB::raw('SUM(laporans.positif) as Positif'),
+                         DB::raw('SUM(laporans.sembuh) as Sembuh'),
+                         DB::raw('SUM(laporans.meninggal) as Meninggal'),
+                         DB::raw('MAX(tanggal) as Tanggal'))
+                         ->whereDay('tanggal', '=' , $hariini)
+                ->join('rws' , 'rws.id', 'laporans.id_rw',)
+                ->join('kelurahans' ,'kelurahans.id', '=', 'rws.id_kelurahan')
+                ->join('kecamatans' ,'kecamatans.id', '=', 'kelurahans.id_kecamatan')
+                ->join('kotas' ,'kotas.id', '=', 'kecamatans.id_kota')
+                ->join('provinsis' ,'provinsis.id', '=', 'kotas.id_provinsi')
+                ->whereDate('laporans.tanggal', date('Y-m-d'))
+                ->groupby('provinsis.id')
+                ->get();
+
         $data = DB::table('kelurahans')
         ->join('rws','rws.id_kelurahan', '=', 'kelurahans.id')
         ->join('laporans','laporans.id_rw', '=', 'rws.id')
@@ -136,12 +196,56 @@ class ApiController extends Controller
         DB::raw('sum(laporans.sembuh) as sembuh'))
         ->groupBy('nama_kelurahan')
         ->get();
-                $res = [
-                    'succsess' => true,
-                    'Data' => $data,
-                    'message' => 'Data Kasus Di Tampilkan'
-                ];
-                return response()->json($res,200);
+        $rest = [
+            'status' => 200,
+            'data' => [ 
+                'Hari Ini' =>[$data_skrg],
+                'Total' =>[$data]
+            ],
+            'message' => 'Data Kasus Kelurahan Ditampilkan'
+        ];
+        return response()->json($rest, 200);
+    }
+
+    public function rw_index()
+    {
+        //Data Kelurahan
+        $hariini = Carbon::now()->format('d-m-y'); 
+        $data_skrg = DB::table('laporans')
+                ->select(DB::raw('rws.id'),
+                         DB::raw('rws.nama_rw as Rw'),
+                         DB::raw('SUM(laporans.positif) as Positif'),
+                         DB::raw('SUM(laporans.sembuh) as Sembuh'),
+                         DB::raw('SUM(laporans.meninggal) as Meninggal'),
+                         DB::raw('MAX(tanggal) as Tanggal'))
+                         ->whereDay('tanggal', '=' , $hariini)
+                ->join('rws' , 'rws.id', 'laporans.id_rw',)
+                ->join('kelurahans' ,'kelurahans.id', '=', 'rws.id_kelurahan')
+                ->join('kecamatans' ,'kecamatans.id', '=', 'kelurahans.id_kecamatan')
+                ->join('kotas' ,'kotas.id', '=', 'kecamatans.id_kota')
+                ->join('provinsis' ,'provinsis.id', '=', 'kotas.id_provinsi')
+                ->whereDate('laporans.tanggal', date('Y-m-d'))
+                ->groupby('provinsis.id')
+                ->get();
+
+        $data = DB::table('kelurahans')
+        ->join('rws','rws.id_kelurahan', '=', 'kelurahans.id')
+        ->join('laporans','laporans.id_rw', '=', 'rws.id')
+        ->select('nama_kelurahan',
+        DB::raw('sum(laporans.positif) as positif'),
+        DB::raw('sum(laporans.meninggal) as meninggal'),
+        DB::raw('sum(laporans.sembuh) as sembuh'))
+        ->groupBy('nama_kelurahan')
+        ->get();
+        $rest = [
+            'status' => 200,
+            'data' => [ 
+                'Hari Ini' =>[$data_skrg],
+                'Total' =>[$data]
+            ],
+            'message' => 'Data Kasus Kelurahan Ditampilkan'
+        ];
+        return response()->json($rest, 200);
     }
 
     public function showprovinsi($id)

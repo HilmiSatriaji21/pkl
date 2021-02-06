@@ -14,7 +14,8 @@ class KotaSeeder extends Seeder
      */
     public function run()
     {
-        $kotas = [
+        
+        DB::table('kotas')->insert([
             ['kode_kota' => 1101, 'id_provinsi' => 1, 'nama_kota' => "KABUPATEN SIMEULUE"],
 			['kode_kota' => 1102, 'id_provinsi' => 1, 'nama_kota' => "KABUPATEN ACEH SINGKIL"],
 			['kode_kota' => 1103, 'id_provinsi' => 1, 'nama_kota' => "KABUPATEN ACEH SELATAN"],
@@ -530,7 +531,6 @@ class KotaSeeder extends Seeder
 			['kode_kota' => 9416, 'id_provinsi' => 34, 'nama_kota' => "KABUPATEN DEIYAI"],
 			['kode_kota' => 9471, 'id_provinsi' => 34, 'nama_kota' => "KOTA JAYAPURA"]
 			
-        ];
-        DB::table('kotas')->insert($kotas);
+        ]);
     }
 }

@@ -14,7 +14,7 @@ class ProvinsiSeeder extends Seeder
      */
     public function run()
     {
-        $provinsis = [
+        DB::table('provinsis')->insert([
             ['kode_provinsi' => 11, 'nama_provinsi' => "ACEH"],
 			['kode_provinsi' => 12, 'nama_provinsi' => "SUMATERA UTARA"],
 			['kode_provinsi' => 13, 'nama_provinsi' => "SUMATERA BARAT"],
@@ -50,8 +50,7 @@ class ProvinsiSeeder extends Seeder
 			['kode_provinsi' => 91, 'nama_provinsi' => "PAPUA BARAT"],
 			['kode_provinsi' => 94, 'nama_provinsi' => "PAPUA"]
 			
-        ];
-        DB::table('provinsis')->insert($provinsis);
+		]);
 
     }
 }

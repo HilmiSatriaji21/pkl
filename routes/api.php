@@ -3,6 +3,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProvinsiController;
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Controllers\Api\NegaraController;
 use App\Models\Provinsi;
 use App\Models\Laporan;
 
@@ -36,4 +37,8 @@ Route::get('provinsiapi', [ApiController::class, 'provinsi_index']);
 Route::get('kotaapi', [ApiController::class, 'kota_index']);
 Route::get('kecamatanapi', [ApiController::class, 'kecamatan_index']);
 Route::get('kelurahanapi', [ApiController::class, 'kelurahan_index']);
+Route::get('rwapi', [ApiController::class, 'rw_index']);
 Route::get('provinsiapi/{id}', [ApiController::class, 'showprovinsi']);
+
+// Negara
+Route::get('negaraapi', [NegaraController::class, 'negara_index']);
