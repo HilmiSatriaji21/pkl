@@ -12,11 +12,6 @@
                     <form action="{{ route('kecamatan.update', $kecamatan->id)}}" method="POST" >
                         @csrf
                         @method('PUT')
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">Kode Kota</label>
-                          <input type="text" name="kode_kecamatan" value="{{$kecamatan->kode_kecamatan}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                          <div id="emailHelp" class="form-text" required=""></div>
-                        </div>
 
                         <div class="form-group">
                             <label for="">Asal Kota</label>

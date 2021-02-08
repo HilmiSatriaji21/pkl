@@ -9,11 +9,6 @@
 
                 <div class="card-body">
                    <div class="form-group">
-                    <div class="mb-12>
-                        <label for="exampleInputEmail1" class="form-label"><b>Kode Kecamatan</b></label>
-                        <input type="number" name="kode_kecamatan" value="{{$kecamatan->kode_kecamatan}}" 
-                        class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" readonly>
-                    </div>
 
                     <div class="form-group">
                         <label for="">Asal Kota</label>

@@ -21,7 +21,6 @@
                             <thead>
                             <tr class="bg-black">
                             <th scope="col"><center>Nomor</center></th>
-                                    <th><center>Kode Kecamatan</th>
                                     <th><center>Nama Kota</th>
                                     <th><center>Nama Kecamatan</th>
                                     <th><center>Action</th>
@@ -32,7 +31,6 @@
                                 @foreach($kecamatan as $data)
                                 <tr>
                                     <td><center><b>{{$no++}}</td>
-                                    <td><center><b>{{$data->kode_kecamatan}}</td>
                                     <td><center><b>{{$data->kota->nama_kota}}</td>
                                     <td><center><b>{{$data->nama_kecamatan}}</td>
                                     <td>

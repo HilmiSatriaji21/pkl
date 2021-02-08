@@ -57,7 +57,6 @@ class KecamatanController extends Controller
         ],$messages);
 
 
-        $kecamatan->kode_kecamatan = $request->kode_kecamatan;
         $kecamatan->nama_kecamatan = $request->nama_kecamatan;
         $kecamatan->id_kota = $request->id_kota; 
         $kecamatan->save();
@@ -115,7 +114,6 @@ class KecamatanController extends Controller
             'id_kota' => 'required|numeric',
         ],$messages);
         
-        $kecamatan->kode_kecamatan = $request->kode_kecamatan;
         $kecamatan->nama_kecamatan = $request->nama_kecamatan;
         $kecamatan->id_kota = $request->id_kota;
         $kecamatan->save();
