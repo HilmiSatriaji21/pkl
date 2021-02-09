@@ -21,7 +21,7 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="{{url('/admin')}}"><b>Kawal</b>Covid</a>
+    <a href=""><b>Kawal</b>Covid</a>
   </div>
 
   <div class="card">

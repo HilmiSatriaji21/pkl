@@ -66,6 +66,10 @@ Route::get('rw',function () {
     return view('Rw.index');
 });
 
+Route::get('dashboard',function () {
+    return view('dashboard.index');
+});
+
 use App\Http\Controllers\NegaraController;
 Route::resource('negara', NegaraController::class);
 
