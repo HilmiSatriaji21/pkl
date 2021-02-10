@@ -68,6 +68,9 @@ Route::get('rw',function () {
 
 Route::get('dashboard',function () {
     return view('dashboard.index');
+
+});Route::get('dashboard2',function () {
+    return view('dashboard.index2');
 });
 
 use App\Http\Controllers\NegaraController;

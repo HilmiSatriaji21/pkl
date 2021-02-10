@@ -13,6 +13,37 @@
 
   </head>
   <body >
+
+  <div class="header hor-header">
+					<div class="container">
+                    <div class="bg-light">
+  <div class="container ">
+            <div class="row">
+                <div class="col-sm">
+        <nav class="navbar navbar-light bg-white" style="background-color: #fff;">
+        <span class="navbar-brand mb-0 h1">MiiKun12</span>
+        
+        <body class="antialiased">
+        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
+            @if (Route::has('login'))
+                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                    @auth
+                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 underline">Home</a>
+                    @else
+                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">LOGIN</a>
+
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">REGISTER</a>
+                        @endif
+                    @endauth
+                </div>
+            @endif
+    </span>
+        </nav>
+  
+    </div>
+    </div>
+
     <?php
         $datapositif = file_get_contents("https://api.kawalcorona.com/positif");
         $positif = json_decode($datapositif, TRUE);
@@ -33,22 +64,15 @@
   <div class="container ">
             <div class="row">
                 <div class="col-sm">
-                <br><a href="home"><img src="{{asset('assets/img/logo-ehi.png')}}" width="200" height="70" ></a><br><br>
-        <nav class="navbar navbar-light bg-white" style="background-color: #E43510;">
-        </nav>
   
     </div>
     </div>
          <div class="container " >
-   
-   
+                <br><h1 class="display-3 text-center">Tracking Covid</h1>
+		<p class="lead m-0 text-center">Coronavirus Global &amp; Indonesia Live Data</p>
+        
             <div class="row">
                 <div class="col-sm">
-                <div class="alert bg-success img-card box-secondary-shadow" role="alert">
-                <div class="text-white">
-                <h1 class="font-weight-bolder text-white mb-0"><center> Kawal Corona </center> </h1>
-                    </div>
-                </div>
                 </div>
             </div>
             <br>
@@ -62,7 +86,6 @@
             <h2 class="mb-0 number-font"><?php echo $positif['value'] ?></h2>
             <p class="text-white mb-0">ORANG</p>
            </div>
-           <div class="ml-auto"> <img src="{{asset('assets/img/sad-u6e.png')}}" width="50" height="50" alt="Positif"> </div>
           </div>
          </div>
         </div>
@@ -76,7 +99,6 @@
             <h2 class="mb-0 number-font"><?php echo $sembuh['value'] ?></h2>
             <p class="text-white mb-0">ORANG</p>
            </div>
-           <div class="ml-auto"> <img src="{{asset('assets/img/happy-ipM.png')}}" width="50" height="50" alt="Positif"> </div>
           </div>
          </div>
         </div>
@@ -90,7 +112,6 @@
             <h2 class="mb-0 number-font"><?php echo $meninggal['value'] ?></h2>
             <p class="text-white mb-0">ORANG</p>
            </div>
-           <div class="ml-auto"> <img src="{{asset('assets/img/emoji-LWx.png')}}" width="50" height="50" alt="Positif"> </div>
           </div>
          </div>
         </div>
@@ -103,7 +124,6 @@
             <h2 class="text-white mb-0">INDONESIA</h2>
             <p class="mb-0 number-font"><?php echo $id[0]['positif'] ?>&nbsp; POSITIF,<?php echo $id[0]['sembuh'] ?>SEMBUH, <?php echo $id[0]['meninggal'] ?>MENINGGAL</p>
            </div>
-           <div class="ml-auto"> <img src="{{asset('assets/img/indonesia-PZq.png')}}" width="50" height="50" alt="Positif"> </div>
           </div>
          </div>
         </div>
@@ -120,7 +140,7 @@
      <div class="col-sm">
       <div class="card">
             <div class="card-header ">
-                    <h3 class="card-title">Data Kasus Corona Virus Di Dunia</h3>
+                    <h3 class="card-title">Data Kasus Corona virus di Dunia</h3>
                     </div>
                      <div class="card-body" >
                          <div style="height:600px;overflow:auto;margin-right:15px;">
@@ -161,7 +181,7 @@
                      </div>
                    </div>
       <div class="card-header ">
-       <h3 class="card-title">Data Kasus Corona Virus di Indonesia Berdasarkan Provinsi</h3>
+       <h3 class="card-title">Data Kasus Corona virus di Indonesia Berdasarkan Provinsi</h3>
        </div>
         <div class="card-body" >
             <div style="height:600px;overflow:auto;margin-right:15px;">
@@ -260,9 +280,6 @@
             </div>
             <div class="col-lg-12 col-sm-12 mt-3 mt-lg-0 text-center">
                                                     
-             Use Cascading Style Sheets from Kawalcorona.com </a>. Made with <svg class="bi bi-heart-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" clip-rule="evenodd"/>
-</svg> by <a href="https://www.instagram.com/" target="_blank"></a>
             </div>
            </div>
           </div>
