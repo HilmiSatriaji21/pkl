@@ -99,3 +99,6 @@ Route::resource('kasus2', Kasus2Controller::class);
 
 use App\Http\Controllers\LaporanController;
 Route::resource('laporan', LaporanController::class);
+
+use App\Http\Controllers\FrontendController;
+Route::resource('frontend',FrontendController::class);

@@ -40,17 +40,17 @@
 <body>
 <?php
         $datapositif = file_get_contents("https://api.kawalcorona.com/positif");
-        $positif = json_decode($datapositif, TRUE);
-        $datasembuh = file_get_contents("https://api.kawalcorona.com/sembuh");
-        $sembuh = json_decode($datasembuh, TRUE);
-        $datameninggal = file_get_contents("https://api.kawalcorona.com/meninggal");
-        $meninggal = json_decode($datameninggal, TRUE);
-        $dataid = file_get_contents("https://api.kawalcorona.com/indonesia");
-        $id = json_decode($dataid, TRUE);
-        $dataidprovinsi = file_get_contents("https://api.kawalcorona.com/indonesia/provinsi");
-        $idprovinsi = json_decode($dataidprovinsi, TRUE);
-        $datadunia= file_get_contents("https://api.kawalcorona.com/");
-        $dunia = json_decode($datadunia, TRUE);
+            $positif = json_decode($datapositif, true);
+            $datasembuh =file_get_contents("https://api.kawalcorona.com/sembuh");
+            $sembuh = json_decode($datasembuh, true);
+            $datameninggal = file_get_contents("https://api.kawalcorona.com/meninggal");
+            $meninggal = json_decode($datameninggal, true);
+            $dataid = file_get_contents("https://api.kawalcorona.com/indonesia");
+            $id = json_decode($dataid, true);
+            $dataidprovinsi = file_get_contents("https://api.kawalcorona.com/indonesia/provinsi");
+            $idprovinsi = json_decode($dataidprovinsi, true);
+            $datadunia = file_get_contents("https://api.kawalcorona.com/");
+            $dunia = json_decode($datadunia, true);
     ?>
 
   <!-- ======= Top Bar ======= -->
@@ -166,15 +166,18 @@
      </div>
      <br>
     </section><!-- End About Section -->
-    <div class="row">
-     <div class="col-sm">
-      <div class="card">
-            <div class="card-header ">
-                    <h3 class="card-title">Data Kasus Corona Virus Di Dunia</h3>
-                    </div>
+    &nbsp;
+  <section class="showcase">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-1"></div>
+      <div class="col-lg-10">
+        <div class="card">
+          <div class="card-header">Data Kasus Corona Virus Berdasarkan Negara</div>
+          <div class="card-body">
+            <div style="height:600px;overflow:auto;margin-right:15px;">
+            <table class="table table-striped">
                      <div class="card-body" >
-                         <div style="height:600px;overflow:auto;margin-right:15px;">
-                                 <table class="table table-striped"  fixed-header  >
                                  <thead>
                                      <tr>
                                      <th scope="col">Nomor</th>
@@ -210,47 +213,50 @@
                                
                      </div>
                    </div>
-      <div class="card-header ">
-       <h3 class="card-title">Data Kasus Corona Virus di Indonesia Berdasarkan Provinsi</h3>
-       </div>
-        <div class="card-body" >
-            <div style="height:600px;overflow:auto;margin-right:15px;">
-                    <table class="table table-striped"  fixed-header  >
-                    <thead>
-                        <tr>
-                        <th scope="col">Nomor</th>
-                        <th scope="col">Provinsi</th>
-                        <th scope="col">Kasus Positif</th>
-                        <th scope="col">Kasus Sembuh</th>
-                        <th scope="col">Kasus Meninggal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <br>   
 
-                    @php
-                        $no = 1;    
-                    @endphp
-                    <?php
-                        for ($i= 0; $i <= 23; $i++){
-                        
-                        ?>
+<div class="card-header ">
+&nbsp;
+  <section class="showcase">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-1"></div>
+      <div class="col-lg-10">
+        <div class="card">
+          <div class="card-header">Data Kasus Corona Virus Berdasarkan Provinsi</div>
+          <div class="card-body">
+            <div style="height:600px;overflow:auto;margin-right:15px;">
+            <table class="table table-striped">
+              <thead>
+                <th>No</th>
+                <th>Provinsi</th>
+                <th>Positif</th>
+                <th>Sembuh</th>
+                <th>Meninggal</th>
+              </thead>
+              <tbody>
+                @php
+                  $no = 1;   
+                @endphp
+                @foreach ($provinsi as $data)
                     <tr>
-                        <td> <?php echo $i+1 ?></td>
-                        <td> <?php echo $idprovinsi[$i]['attributes']['Provinsi'] ?></td>
-                        <td> <?php echo $idprovinsi[$i]['attributes']['Kasus_Posi'] ?></td>
-                        <td> <?php echo $idprovinsi[$i]['attributes']['Kasus_Semb'] ?></td>
-                        <td> <?php echo $idprovinsi[$i]['attributes']['Kasus_Meni'] ?></td>
+                      <td>{{$no++}}</td>
+                      <td>{{$data->nama_provinsi}}</td>
+                      <td>{{$data->positif}}</td>
+                      <td>{{$data->sembuh}}</td>
+                      <td>{{$data->meninggal}}</td>
                     </tr>
-                        <?php 
-                    
-                    } ?>
-                    </tbody>
-                    </table>
-                   
-                  
+                @endforeach
+                
+            </tbody>
+          </table>
         </div>
       </div>
-     </div>
+    </div>
+    
+    
+  </section>
+  &nbsp;  
   </footer><!-- End Footer -->
 
   <div id="preloader"></div>
