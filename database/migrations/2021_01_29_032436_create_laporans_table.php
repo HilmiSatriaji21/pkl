@@ -15,14 +15,11 @@ class CreateLaporansTable extends Migration
     {
         Schema::create('laporans', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('id_rw')->unsigned();
-            $table->foreign('id_rw')
-                    ->references('id')
-                    ->on('rws')->onDelete('cascade');
-                    $table->string('positif');
-                    $table->string('sembuh');
-                    $table->string('meninggal');
-                    $table->date('tanggal');
+            $table->foreignId('id_rw')->constrained('rws')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('positif');
+            $table->integer('sembuh');
+            $table->integer('meninggal');
+            $table->date('tanggal');
             $table->timestamps();
         });
     }

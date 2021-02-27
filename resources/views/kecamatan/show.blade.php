@@ -1,32 +1,30 @@
 @extends('layouts.master2')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            <div class="card">
-                <div class="card-header">{{ __('Data Kecamatan') }}</div>
-
-                <div class="card-body">
-                   <div class="form-group">
-
-                    <div class="form-group">
-                        <label for="">Asal Kota</label>
-                        <input type="text" name="id_kota" class="form-control" value="{{$kecamatan->kota->nama_kota}}" readonly>
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-header bg-primary">
+            Form Lihat Data Kecamatan
+        </div>
+        <div class="card-body">
+                <div class="row">
+                    @foreach ($kecamatan as $data)
+                    <div class="form-group col-lg-6">
+                        <label for="nama_kota" class="control-label">Nama Kota</label>
+                        <input type="text" name="nama_kota" id="nama_kota" value="{{$data->nama_kota}}" class="form-control" readonly>
                     </div>
-
-                     </div>
-                      <div class="form-group">
-                    <div class="mb-12>
-                        <label for="exampleInputPassword1" class="form-label"><b>Nama Kecamatan</b></label>
-                        <input type="text" name="nama_kecamatan" value="{{$kecamatan->nama_kecamatan}}" 
-                        class="form-control" id="exampleInputPassword1" readonly>
+                    <div class="form-group col-lg-6">
+                        <label for="nama_kecamatan" class="control-label">Nama Kecamatan</label>
+                        <input type="text" name="nama_kecamatan" id="nama_kecamatan" value="{{$data->nama_kecamatan}}" class="form-control" readonly>
                     </div>
-                     </div>
-                     <a href="{{url()->previous()}}" class="btn btn-primary">Kembali</a>
+                    @endforeach
                 </div>
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        <a href="{{url()->previous()}}" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i></a>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>

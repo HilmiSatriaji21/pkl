@@ -61,6 +61,7 @@
           <li><a href="#kasus">Data Kasus</a></li>
           <li><a href="#kasusdunia">Data Kasus Dunia</a></li>
           <li><a href="#kasusindonesia">Data Kasus Indonesia</a></li>
+          <li><a href="#berita">Berita</a></li>
           <li><a href="#gallery">Foto</a></li>
           <!-- <li class="drop-down"><a href="">Data Negara</a>
             <ul>
@@ -89,9 +90,6 @@
     <section id="kasus" class="kasus">
       <div class="container-fluid">
       <div class="container " >
-                <br><h1 class="display-3 text-center">Tracking Covid</h1>
-		<p class="lead m-0 text-center">Coronavirus Global &amp; Indonesia Live Data</p>
-        
             <div class="row">
                 <div class="col-sm">
                 </div>
@@ -242,11 +240,61 @@
         </div>
       </div>
     </div>
-    
-    
   </section>
+  <br>
   &nbsp;  
-  
+  <!-- ROW-2 OPEN -->
+  <div class="card-header ">
+  <section id="berita" class="berita">
+      <div class="container">
+      <div class="section-title">
+          <h2>Berita</h2>
+          <p> laporan tercepat mengenai fakta atau ide terbaru yang benar, menarik dan atau penting bagi sebagian besar khalayak</p>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="row no-gutters">
+							<div class="col-md-12 col-xl-6">
+								<a href="https://www.unicef.org/indonesia/id/coronavirus">
+								<div class="card text-white bg-info">
+									<div class="card-body">
+										<h4 class="card-title">Novel coronavirus (COVID-19): Hal-hal yang perlu Anda ketahui</h4>
+										<p class="card-text">Unicef Indonesia</p>
+									</div>
+								</div>
+							</div></a><!-- COL END -->
+							<div class="col-md-12 col-xl-6">
+								<a href="https://www.kompas.com/tren/read/2020/03/03/183500265/infografik-daftar-100-rumah-sakit-rujukan-penanganan-virus-corona">
+								<div class="card text-white bg-secondary">
+									<div class="card-body">
+										<h4 class="card-title">Daftar 100 Rumah Sakit Rujukan Penanganan Virus Corona</h4>
+										<p class="card-text">Kompas</p>
+									</div>
+								</div>
+							</div></a><!-- COL END -->
+							<div class="col-md-12 col-xl-6">
+								<a href="https://infeksiemerging.kemkes.go.id/">
+								<div class="card text-white bg-success">
+									<div class="card-body">
+										<h4 class="card-title">Media Informasi Resmi Penyakit Infeksi Emerging</h4>
+										<p class="card-text">Kementrian Kesehatan </p>
+									</div>
+								</div>
+							</div></a><!-- COL END -->
+							<div class="col-md-12 col-xl-6">
+								<a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public">
+								<div class="card text-white bg-danger">
+									<div class="card-body">
+										<h4 class="card-title">Coronavirus Disease (COVID-19) Advice for The Public</h4>
+										<p class="card-text">WHO</p>
+									</div>
+								</div>
+							</div></a><!-- COL END -->
+					</div>
+				</div>
+				<!-- CONTAINER CLOSED -->
+			</div>
+
 
     <!-- ======= Why Us Section ======= -->
      

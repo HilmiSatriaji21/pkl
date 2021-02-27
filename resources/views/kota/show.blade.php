@@ -1,37 +1,34 @@
 @extends('layouts.master2')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            <div class="card">
-                <div class="card-header">{{ __('Data Kota') }}</div>
-
-                <div class="card-body">
-                   <div class="form-group">
-                    <div class="mb-12>
-                        <label for="exampleInputEmail1" class="form-label"><b>Kode Kota</b></label>
-                        <input type="number" name="kode_kota" value="{{$kota->kode_kota}}" 
-                        class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" readonly>
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-header bg-primary">
+            Form Lihat Data Kota
+        </div>
+        <div class="card-body">
+                <div class="row">
+                    @foreach ($kota as $data)
+                    <div class="form-group col-lg-6">
+                        <label for="nama_provinsi" class="control-label">Nama Provinsi</label>
+                        <input type="text" name="nama_provinsi" id="nama_provinsi" value="{{$data->nama_provinsi}}" class="form-control" readonly>
                     </div>
-
-                    <div class="form-group">
-                        <label for="">Asal Provinsi</label>
-                        <input type="text" name="id_provinsi" class="form-control" value="{{$kota->provinsi->nama_provinsi}}" readonly>
+                    <div class="form-group col-lg-6">
+                        <label for="kode_kota" class="control-label">Kode Kota</label>
+                        <input type="text" name="kode_kota" id="kode_kota" value="{{$data->kode_kota}}" class="form-control" readonly>
                     </div>
-
-                     </div>
-                      <div class="form-group">
-                    <div class="mb-12>
-                        <label for="exampleInputPassword1" class="form-label"><b>Nama Kota</b></label>
-                        <input type="text" name="nama_kota" value="{{$kota->nama_kota}}" 
-                        class="form-control" id="exampleInputPassword1" readonly>
+                    <div class="form-group col-lg-6">
+                        <label for="nama_kota" class="control-label">Nama Kota</label>
+                        <input type="text" name="nama_kota" id="nama_kota" value="{{$data->nama_kota}}" class="form-control" readonly>
                     </div>
-                     </div>
-                     <a href="{{url()->previous()}}" class="btn btn-primary">Kembali</a>
+                    @endforeach
                 </div>
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        <a href="{{url()->previous()}}" class="btn btn-success"><i class="fa fa-chevron-circle-left"></i></a>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
